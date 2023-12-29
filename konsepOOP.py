@@ -77,4 +77,20 @@ class User(DatabaseManager):
                 return "200"
         else:
             return "404"
+        
+
+# no 2 : override
+    # tidak ada, karena memang tidak memerlukan pengubahan metode
+
+# no 3 : class baru 
+class hav(DatabaseManager):
+    def __init__(self, db_file,id_buku,username):
+        super().__init__(db_file)
+        self.__id_buku = id_buku  #konsep encapsulation, dimana sifat dari id_buku di ubah yang tadinya publik menjadi private
+        self.username = username
+
+    #konsep polymorphisme, yang dimana fungsi tambah data di gunakan di clas ini namun di gunakan juga di class user dan buku
+    def tambah_data(self):
+        query = f"INSERT INTO terbaru VALUES (null, '{self.judul}', '{self.kategori}', '{self.deskripsi}', '{self.file}', '{self.sampul}')"
+        self.execute_query(query)
 
